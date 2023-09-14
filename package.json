@@ -1,6 +1,6 @@
 {
   "name": "todo-with-bun_htmx",
-  "module": "index.ts",
+  "module": "index.tsx",
   "type": "module",
   "scripts": {
     "start": "bun run index.tsx",
