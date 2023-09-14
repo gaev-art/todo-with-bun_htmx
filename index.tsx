@@ -1,6 +1,3 @@
-// A simple way to connect FileSystemRouter to Bun#serve
-// run with `bun run index.tsx`
-
 import { renderToReadableStream } from 'react-dom/server';
 import { FileSystemRouter } from 'bun';
 

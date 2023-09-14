@@ -1,12 +1,11 @@
-// reachable from http://localhost:3000/two
-
 export default () => (
   <html>
     <head>
       <title>two</title>
     </head>
     <body>
-      <p>two</p>
+      <h1>two</h1>
+      <a href="/">main</a>
     </body>
   </html>
 );

@@ -1,5 +1,3 @@
-// reachable from http://localhost:3000/
-
 export default () => (
   <html>
     <head>
