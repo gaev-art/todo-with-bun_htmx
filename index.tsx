@@ -34,7 +34,7 @@ async function handler(request: Request): Promise<Response> {
   const url = new URL(request.url);
 
   if (url.pathname === '' || url.pathname === '/')
-    return new Response(Bun.file('index.html'));
+    return new Response(Bun.file('./public/index.html'));
 
   if (request.method === 'GET' && url.pathname === '/todos') {
     return new Response(renderToString(<TodoList todos={todos} />));
