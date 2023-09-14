@@ -45,6 +45,19 @@ async function handler(request: Request): Promise<Response> {
     return new Response(renderToString(<TodoList todos={todos} />));
   }
 
+  if (request.method === 'DELETE') {
+    const regex = /\/todos\/([a-f0-9-]+)/;
+    const match = url.pathname.match(regex);
+
+    if (match) {
+      const id = match[1];
+      const idx = todos.findIndex((t) => t.id === id);
+      todos.splice(idx, 1);
+    }
+
+    return new Response('');
+  }
+
   return new Response('NotFound', { status: 404 });
 }
 
