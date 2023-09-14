@@ -2,6 +2,9 @@ import { randomUUID } from 'crypto';
 import { renderToString } from 'react-dom/server';
 
 import { TodoList } from './components/TodoList';
+import { updateTodoTextById } from './helpers/updateTodoTextById';
+import TodoItem from './components/TodoItem';
+import EditTodo from './components/EditTodo';
 
 export type Todo = {
   id: string;
@@ -25,6 +28,8 @@ const server = Bun.serve({
   fetch: handler,
 });
 
+const regex = /\/todo\/([a-f0-9-]+)/;
+
 async function handler(request: Request): Promise<Response> {
   const url = new URL(request.url);
 
@@ -43,6 +48,35 @@ async function handler(request: Request): Promise<Response> {
     todos.push({ text: todo, id: randomUUID() });
 
     return new Response(renderToString(<TodoList todos={todos} />));
+  }
+
+  if (request.method === 'GET' && url.pathname.match(regex)) {
+    const match = url.pathname.match(regex);
+
+    if (match) {
+      const id = match[1];
+      const todo = todos.find((t) => t.id === id);
+
+      if (!todo) return new Response('Invalid input', { status: 500 });
+
+      return new Response(renderToString(<EditTodo todo={todo} />));
+    }
+  }
+
+  if (request.method === 'POST' && url.pathname.match(regex)) {
+    const match = url.pathname.match(regex);
+    const { text } = await request.json();
+
+    if (match) {
+      const id = match[1];
+
+      updateTodoTextById(todos, id, text);
+      const todo = todos.find((t) => t.id === id);
+
+      if (!todo) return new Response('Invalid input', { status: 500 });
+
+      return new Response(renderToString(<TodoItem todo={todo} />));
+    }
   }
 
   if (request.method === 'DELETE') {

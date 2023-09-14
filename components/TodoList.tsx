@@ -15,6 +15,13 @@ export function TodoList(props: { todos: Todo[] }) {
               >
                 remove
               </a>
+              <a
+                style={{ float: 'right', color: 'white', marginLeft: '20px' }}
+                href="#"
+                hx-get={`/todo/${todo.id}`}
+              >
+                edit
+              </a>
             </li>
           ))
         : 'No items added'}
