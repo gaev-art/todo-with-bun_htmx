@@ -35,6 +35,16 @@ async function handler(request: Request): Promise<Response> {
     return new Response(renderToString(<TodoList todos={todos} />));
   }
 
+  if (url.pathname === '/todos' && request.method === 'POST') {
+    const { todo } = await request.json();
+
+    if (!todo?.length) return new Response('Invalid input', { status: 500 });
+
+    todos.push({ text: todo, id: randomUUID() });
+
+    return new Response(renderToString(<TodoList todos={todos} />));
+  }
+
   return new Response('NotFound', { status: 404 });
 }
 
