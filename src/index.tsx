@@ -24,7 +24,6 @@ let todos: Todo[] = [
 
 const server = Bun.serve({
   port: 3000,
-  hostname: 'localhost',
   fetch: handler,
 });
 
@@ -37,6 +36,8 @@ async function handler(request: Request): Promise<Response> {
     return new Response(Bun.file('./public/index.html'));
 
   if (request.method === 'GET' && url.pathname === '/todos') {
+    console.log('GET /todos');
+
     return new Response(renderToString(<TodoList todos={todos} />));
   }
 
@@ -70,7 +71,7 @@ async function handler(request: Request): Promise<Response> {
     if (match) {
       const id = match[1];
 
-      updateTodoTextById(todos, id, text);
+      todos = updateTodoTextById(todos, id, text);
       const todo = todos.find((t) => t.id === id);
 
       if (!todo) return new Response('Invalid input', { status: 500 });

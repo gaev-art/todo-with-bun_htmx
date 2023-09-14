@@ -1,11 +1,11 @@
 {
   "name": "todo-with-bun_htmx",
-  "module": "index.ts",
+  "module": "index.tsx",
   "type": "module",
   "scripts": {
-    "start": "bun run index.tsx",
-    "dev": "bun run --hot index.tsx",
-    "build": "bun build ./index.tsx --outdir ./build"
+    "start": "bun run src/index.tsx",
+    "dev": "bun run --hot src/index.tsx",
+    "build": "bun build src/index.tsx --outdir ./build"
   },
   "devDependencies": {
     "@types/react": "^18.2.21",
