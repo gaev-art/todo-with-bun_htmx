@@ -12,7 +12,7 @@
     "downlevelIteration": true,
     "skipLibCheck": true,
     "jsx": "preserve",
-    "allowSyntheticDefaultImports": true,
+        "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "types": [

@@ -1,17 +1,13 @@
 import { randomUUID } from 'crypto';
 import { renderToString } from 'react-dom/server';
 
-import { TodoList } from './components/TodoList';
-import { updateTodoTextById } from './helpers/updateTodoTextById';
-import TodoItem from './components/TodoItem';
-import EditTodo from './components/EditTodo';
+import { TodoList } from './src/components/TodoList';
+import { updateTodoTextById } from './src/helpers/updateTodoTextById';
+import TodoItem from './src/components/TodoItem';
+import EditTodo from './src/components/EditTodo';
 
-export type Todo = {
-  id: string;
-  text: string;
-};
 
-let todos: Todo[] = [
+let todos = [
   {
     id: randomUUID(),
     text: 'Task 1',
@@ -29,7 +25,7 @@ const server = Bun.serve({
 
 const regex = /\/todo\/([a-f0-9-]+)/;
 
-async function handler(request: Request): Promise<Response> {
+async function handler(request) {
   const url = new URL(request.url);
 
   if (url.pathname === '' || url.pathname === '/')

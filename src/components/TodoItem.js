@@ -1,7 +1,6 @@
 import React from 'react';
-import { Todo } from '../index';
 
-export default function TodoItem(props: { todo: Todo }) {
+export default function TodoItem(props) {
   return (
     <li
       hx-target="this"
